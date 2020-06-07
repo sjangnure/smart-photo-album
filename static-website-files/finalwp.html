@@ -1,0 +1,230 @@
+<html>
+<link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+ <link rel="stylesheet" type="text/css" href="index.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.32.min.js"></script>
+ <!-- <script src="main.js"></script> -->
+<script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+<script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+<script type="text/javascript" src="lib/url-template/url-template.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+<script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+<script type="text/javascript" src="apigClient.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+</script>
+
+<style>
+	.searchbox{
+		width:700px;
+		height:250px;
+		margin-left: 25%;
+		margin-top: 8%;
+		padding-top: 30px;
+		padding-left: 50px;
+    padding-right: 50px;
+		background-color:darkmagenta;
+	}
+	
+	.input-icons i { 
+            position: absolute; 
+
+        } 
+    .upload i { 
+            position: absolute; 
+
+        } 
+	.ip{
+		width:400px;
+	}
+	.input-icons { 
+            width: 100%; 
+            margin-bottom: 10px; 
+
+        } 
+ 	.input-field { 
+            padding: 10px; 
+            text-align: center; 
+        } 
+    .titlebox{
+ 		 width:100%;
+		  height: 10%;
+		  background-color:purple;
+		  color:white;
+		  vertical-align: top;
+		  horizontal-align:center;
+}		
+	.italic {
+	  font-family: "Georgia", Times, serif;
+	  font-style: italic;
+	  font-size: 50px;
+	}
+	.fontall{
+	  font-family: "Georgia", Times, serif;
+	  font-style: italic;
+	  color:white;
+	  font-size: 20px;
+	}
+	.upload{
+		width:700px;
+		height:100px;
+		margin-left: 25%;
+		margin-top: 5%;
+		padding-top: 30px;
+		padding-left: 50px;
+		background-color:darkmagenta;
+    font-family: "Georgia", Times, serif;
+    color:white;
+    font-size: 17px;
+	}
+	.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btnf {
+  border: 2px solid white;
+  color: white;
+  background-color: green;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+
+}
+
+.upload-btn-wrapper input[type=file]
+ { font-size: 100px; position: absolute;
+left: 0; top: 0; opacity: 0; } 
+</style>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdn.shoelace.style/1.0.0-beta24/shoelace.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+ <body style="background-color:lightgrey;"> 
+  <div class="titlebox">
+    <h1 class="italic">Photo Album</h1> 
+  </div> 
+  <div class="searchbox">
+   <form class="form-inline md-form mr-auto mb-4" action="#0" id="search"> 
+      <div class="input-icons"> 
+   	    <!-- <i class="fa fa-search fa-2x"></i>  -->
+   	    <input class="form-control mr-sm-2" id="query" type="text" aria-label="Search"  placeholder="Show me soccer" size="50"> 
+	      <button class="btn btn-success" type="button" id="search1" onclick="search(query)">Search</button> 
+        <br /><br />
+        <textarea id="transcript" placeholder="Search Image" rows="2"
+            readonly="readonly"></textarea>
+                <button id="start-button" class="btn btn-success" title="Start Transcription">
+                <i class="fa fa-microphone fa-2x"></i>&nbsp&nbsp&nbsp&nbsp&nbsp       Start
+                </button>
+                <button id="stop-button" class="btn btn-success" title="Stop Transcription" disabled="true">
+                <i class="fa fa-stop-circle fa-2x"></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      Stop
+                </button>
+                <button id="reset-button" class="btn btn-success" title="Clear Transcript"> 
+                    Clear Search
+                </button>
+                <button class="btn btn-success" type="button" onclick="search2(transcript)" id="search1">Search</button> 
+      </div>
+	 </form>
+	</div> 
+
+	<div class="upload" id="upload">
+		
+ 			 Select image to upload:
+    		<input type="file" class="btn btn-success"  id="fileToUpload">
+    		<button type="submit" class="btn btn-success" onclick="uploadPhoto()">SUBMIT</button>
+		
+	</div>
+	<div id="output">
+    <!-- <img src="https://voicecontrolledsearchb2.s3.amazonaws.com/hqdefault.jpg" alt="Girl in a jacket" /> -->
+	</div> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="bundle.js"></script>
+</body>
+</html>
+
+<script type="text/javascript">
+function search(query){
+ var apigClient = apigClientFactory.newClient();
+ var message=document.getElementById("query").value;
+ var outputArea = document.getElementById("output");
+var obj = {"message":message}
+var body = JSON.stringify(obj);
+var params = {};
+var additionalParams = {headers: {
+  }};
+apigClient.searchPost(params,body,additionalParams).then(function(result){
+  var response=JSON.parse(result.data.body);
+  var links=response.message;
+
+  links = links.slice(1, links.length-1);
+  array_list=links.split(",");
+  for(var i=0;i<array_list.length;i++)
+  {
+    var url=array_list[i];
+    url_list=url.split("'");
+    url1=url_list[1];
+    document.getElementById("output").innerHTML+=
+    "<img src="+url1+" height='350px' width='350px' style='padding: 20px'>";
+  }
+}); 
+}
+function search2(transcript){
+ var apigClient = apigClientFactory.newClient();
+ var message=document.getElementById("transcript").value;
+var obj = {"message":message}
+var body = JSON.stringify(obj);
+var params = {};
+var additionalParams = {headers: {
+  }};
+var outputArea = document.getElementById("output");
+apigClient.searchPost(params,body,additionalParams).then(function(result){
+  var response=JSON.parse(result.data.body);
+  var links=response.message;
+
+  links = links.slice(1, links.length-1);
+  array_list=links.split(",")
+  for(var i=0;i<array_list.length;i++)
+  {
+    var url=array_list[i];   
+    url_list=url.split("'");
+    url1=url_list[1];
+    document.getElementById("output").innerHTML+=
+    "<img src="+url1+" height='300px' width='300px' style='padding: 20px'>";
+  }
+}); 
+}
+
+function uploadPhoto()
+{
+   var file = document.getElementById('fileToUpload').files[0];
+   //alert("inside up");
+   //alert(file.name);
+  let config = {
+      headers: { 'Content-Type': file.type }
+  };
+  url = 'https://cors-anywhere.herokuapp.com/https://dhkp7gq6o0.execute-api.us-east-1.amazonaws.com/dev/upload/voicecontrolledsearchb4combined/' + file.name;
+  axios.put(url, file, config)
+  .then(response => {
+    console.log("This is the response",response);
+  })
+  .catch(error=>{
+    console.log("error is:",error)
+  });
+
+}
+</script>
